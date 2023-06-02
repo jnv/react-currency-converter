@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchRates } from './rates/api';
 import { CurrenciesTable } from './components/CurrenciesTable';
-import { CurrencyConverter } from './components/Converter';
+import { CurrencyConverter } from './components/CurrencyConverter';
 import { Column, Container } from './components/Layout';
 
 function App() {

@@ -9,6 +9,7 @@ export const CURRENCY_FLAGS: Record<string, string> = {
   BGN: '🇧🇬', // Bulgaria
   CAD: '🇨🇦', // Canada
   CNY: '🇨🇳', // China
+  CZK: '🇨🇿', // Czech Republic
   DKK: '🇩🇰', // Denmark
   EUR: '🇪🇺', // EMU
   HKD: '🇭🇰', // Hong Kong
