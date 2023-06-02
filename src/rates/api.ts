@@ -1,9 +1,10 @@
 import { RATE_API_URL } from '../config';
 import { Currency } from '../types';
 
-export async function fetchRates() {
-  const response = await fetch(RATE_API_URL);
+export async function fetchRates(): Promise<Currency[]> {
+  const response = await fetch(RATE_API_URL, { referrerPolicy: 'no-referrer' });
   if (!response.ok) {
+    console.log(response.status);
     throw new Error('Failed to fetch rates');
   }
   const text = await response.text();
