@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchRates } from './rates/api';
+import { CurrenciesTable } from './components/CurrenciesTable';
 
 function App() {
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data, isSuccess } = useQuery({
     queryKey: ['rates'],
     queryFn: fetchRates,
   });
@@ -15,7 +16,11 @@ function App() {
     return <div>Error: {error.message}</div>;
   }
 
-  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+  if (isSuccess) {
+    return <CurrenciesTable currencies={data} />;
+  }
+
+  return <div>Invalid state</div>;
 }
 
 export default App;
