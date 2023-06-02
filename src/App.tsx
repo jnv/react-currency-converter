@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchRates } from './rates/api';
 import { CurrenciesTable } from './components/CurrenciesTable';
+import { CurrencyConverter } from './components/Converter';
+import { Column, Container } from './components/Layout';
 
 function App() {
   const { isLoading, error, data, isSuccess } = useQuery({
@@ -17,10 +19,21 @@ function App() {
   }
 
   if (isSuccess) {
-    return <CurrenciesTable currencies={data} />;
+    return (
+      <Column>
+        <CurrencyConverter currencies={data} />
+        <CurrenciesTable currencies={data} />
+      </Column>
+    );
   }
 
   return <div>Invalid state</div>;
 }
 
-export default App;
+export default function Wrapper() {
+  return (
+    <Container>
+      <App />
+    </Container>
+  );
+}
