@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Currency } from '../types';
+import { getCurrencyFlag } from '../utils';
 
 const Table = styled.table`
   width: 100%;
@@ -41,7 +42,10 @@ export function CurrenciesTable({ currencies }: Props) {
       <tbody>
         {currencies.map((currency) => (
           <Row key={currency.code}>
-            <Cell>{currency.country}</Cell>
+            <Cell>
+              {getCurrencyFlag(currency.code)}&nbsp;
+              {currency.country}
+            </Cell>
             <Cell>{currency.currency}</Cell>
             <Cell>{currency.amount}</Cell>
             <Cell>{currency.code}</Cell>
