@@ -2,7 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchRates } from './rates/api';
 import { CurrenciesTable } from './components/CurrenciesTable';
 import { CurrencyConverter } from './components/CurrencyConverter';
-import { Column, Container } from './components/Layout';
+import {
+  Column,
+  Container,
+  MainHeading,
+  SectionHeading,
+} from './components/Layout';
 
 function App() {
   const { isLoading, error, data, isSuccess } = useQuery({
@@ -21,8 +26,12 @@ function App() {
   if (isSuccess) {
     return (
       <Column>
+        <MainHeading>Currency Converter</MainHeading>
         <CurrencyConverter currencies={data} />
-        <CurrenciesTable currencies={data} />
+        <section>
+          <SectionHeading>Current Rates</SectionHeading>
+          <CurrenciesTable currencies={data} />
+        </section>
       </Column>
     );
   }

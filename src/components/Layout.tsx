@@ -11,3 +11,10 @@ export const Column = styled.div`
   flex-direction: column;
   gap: 1rem;
 `;
+
+export const MainHeading = styled.h1`
+  text-align: center;
+`;
+
+export const SectionHeading = styled.h2`
+`;
