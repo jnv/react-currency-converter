@@ -13,15 +13,15 @@ const FORM_IDS = {
 };
 
 const ConverterWrapper = styled.div`
-  border: thin #ddd solid;
-  padding: 1ex;
+  border: thin solid #ccc;
+  padding: 1em;
 `;
 
 const CurrencyForm = styled.form``;
 
 const CurrencyInput = styled.input`
   width: 12ch;
-  padding: 1ex 1em;
+  padding: 1ex;
 `;
 
 const CurrencySelect = styled.select`

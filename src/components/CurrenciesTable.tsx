@@ -10,6 +10,9 @@ const Table = styled.table`
 const Row = styled.tr`
   &:nth-child(odd) {
     background-color: #f2f2f2;
+    @media (prefers-color-scheme: dark) {
+      background-color: #333;
+    }
   }
 `;
 
