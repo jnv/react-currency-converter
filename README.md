@@ -2,7 +2,28 @@
 
 Technical task for interview process.
 
-## Assignment
+## Setup
+
+Run `npm i`
+
+## Usage
+
+Start the development server with `vercel dev`
+
+## Implementation notes
+
+- Uses Vite instead of CRA
+- Some basic tests for text parsing and conversion are included, can be run with `npm t`
+- Originally I've handled data fetching via CORS proxy, but decided to move it to Vercel's serverless function (accessible at `/api/rates`)
+- Dark mode is supported
+
+<details>
+
+<summary>
+
+Assignment
+
+</summary>
 
 Create a simple React app (don’t use NextJS please), which:
 
@@ -23,6 +44,8 @@ Create a simple React app (don’t use NextJS please), which:
 6. Tech stack: React (+ Hooks), TypeScript, Styled Components, React Query.
 
 Overall: Keep the code simple and the UI nice and easy to use for the user.
+
+</details>
 
 ## Currency data
 
