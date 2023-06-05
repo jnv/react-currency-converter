@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   :root {
-    font-family: sans-serif;
+    font-family: system-ui, sans-serif;
     line-height: 1.5;
   }
 
