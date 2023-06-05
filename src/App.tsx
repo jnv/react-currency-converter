@@ -32,6 +32,15 @@ function App() {
           <SectionHeading>Current Rates</SectionHeading>
           <CurrenciesTable ratesDocument={data} />
         </section>
+
+        <footer>
+          <p>
+            Data source:{' '}
+            <a href="https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/">
+              Czech National Bank exchange rate fixing
+            </a>
+          </p>
+        </footer>
       </Column>
     );
   }
