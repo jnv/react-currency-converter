@@ -12,6 +12,18 @@ const GlobalStyle = createGlobalStyle`
     justify-content: center;
     align-items: center;
   }
+
+  @media screen and (prefers-color-scheme:dark) {
+    a:link {
+     color:#9e9eff
+    }
+    a:visited {
+     color:#d0adf0
+    }
+    a:active {
+     color:red
+    }
+   }
 `;
 
 export default GlobalStyle;
