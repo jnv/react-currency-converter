@@ -1,6 +1,8 @@
 # Currency Converter app
 
-Technical task for interview process.
+Currency conversion app made with React, Tanstack Query, Styled Components, Vite, and Vercel serverless functions.
+
+Sources data from [Czech National Bank](https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/).
 
 ## Setup
 
