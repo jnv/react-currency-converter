@@ -4,6 +4,8 @@ Currency conversion app made with React, Tanstack Query, Styled Components, Vite
 
 Sources data from [Czech National Bank](https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/).
 
+You can visit the running app at https://react-currency-converter-iota.vercel.app/
+
 ## Setup
 
 Run `npm i`
