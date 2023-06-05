@@ -4,6 +4,7 @@ import { getCurrencyFlag } from '../utils';
 import { FormEvent, useState } from 'react';
 import { FormEventHandler } from 'react';
 import { convertAmountToCurrency } from '../rates/conversion';
+import { useCurrenciesByCode } from '../rates/hooks';
 
 const FORM_IDS = {
   form: 'conversion_form',
@@ -55,9 +56,9 @@ function ConversionForm({ currencies, onChange }: FormProps) {
           id={FORM_IDS.amount}
           name={FORM_IDS.amount}
           type="number"
-          placeholder=""
           required
           min={0}
+          defaultValue="0"
         />{' '}
         <label htmlFor={FORM_IDS.amount}>{getCurrencyFlag('CZK')} CZK</label>{' '}
         <label htmlFor={FORM_IDS.currency}>to</label>{' '}
@@ -113,7 +114,7 @@ type ConversionInput = {
   currency: string;
 };
 
-export function CurrencyConverter({ currencies }: ConverterProps) {
+function CurrencyConverter({ currencies }: ConverterProps) {
   const [conversionInput, setConversionInput] = useState<ConversionInput>({
     amount: 0,
     currency: '',
@@ -137,4 +138,20 @@ export function CurrencyConverter({ currencies }: ConverterProps) {
       />
     </ConverterWrapper>
   );
+}
+
+export default function CurrencyConverterWrapper() {
+  const { data, error } = useCurrenciesByCode();
+
+  if (error) {
+    return (
+      <ConverterWrapper>
+        <p>
+          Error:{' '}
+          {error instanceof Error ? error.message : JSON.stringify(error)}
+        </p>
+      </ConverterWrapper>
+    );
+  }
+  return <CurrencyConverter currencies={data || {}} />;
 }
