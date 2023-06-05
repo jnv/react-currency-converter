@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { RatesDocument } from '../types';
+import { Currency } from '../types';
 import { getCurrencyFlag } from '../utils';
+import { useRatesDocument } from '../rates/hooks';
 
 const Table = styled.table`
   width: 100%;
@@ -33,15 +34,13 @@ const HeadCell = styled(Cell)`
 `;
 
 type Props = {
-  ratesDocument: RatesDocument;
+  dateUpdated: string;
+  currencies: Currency[];
 };
-export function CurrenciesTable({ ratesDocument }: Props) {
-  const currencies = Object.values(ratesDocument.currencies);
+function CurrenciesTable({ dateUpdated, currencies }: Props) {
   return (
     <Table>
-      <TableCaption>
-        Rates updated on {ratesDocument.date} (#{ratesDocument.sequence})
-      </TableCaption>
+      <TableCaption>Rates updated on {dateUpdated}</TableCaption>
       <thead>
         <HeadRow>
           <HeadCell>Country</HeadCell>
@@ -67,4 +66,19 @@ export function CurrenciesTable({ ratesDocument }: Props) {
       </tbody>
     </Table>
   );
+}
+
+export default function CurrenciesTableWrapper() {
+  const { data, isSuccess, isError } = useRatesDocument();
+  if (isError) {
+    return <div>Failed to load conversion rates.</div>;
+  }
+  let currencies: Currency[] = [];
+  let dateUpdated = '(loading)';
+
+  if (isSuccess) {
+    currencies = Object.values(data.currencies);
+    dateUpdated = data.date;
+  }
+  return <CurrenciesTable dateUpdated={dateUpdated} currencies={currencies} />;
 }
