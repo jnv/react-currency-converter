@@ -8,8 +8,7 @@ const Table = styled.table`
 `;
 
 const TableCaption = styled.caption`
-  caption-side: bottom;
-  padding: 1em 0;
+  padding: 0 0 1em;
   text-align: left;
 `;
 
