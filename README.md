@@ -4,7 +4,7 @@ Currency conversion app made with React, Tanstack Query, Styled Components, Vite
 
 Sources data from [Czech National Bank](https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/).
 
-You can visit the running app at https://react-currency-converter-iota.vercel.app/
+You can visit the running app at https://react-currency-converter-jnv.vercel.app/
 
 ## Setup
 
@@ -23,11 +23,7 @@ Start the development server with `vercel dev`
 
 <details>
 
-<summary>
-
-Assignment
-
-</summary>
+<summary>Assignment</summary>
 
 Create a simple React app (don’t use NextJS please), which:
 
@@ -50,41 +46,3 @@ Create a simple React app (don’t use NextJS please), which:
 Overall: Keep the code simple and the UI nice and easy to use for the user.
 
 </details>
-
-## Currency data
-
-From [docs](https://www.cnb.cz/en/faq/Format-of-the-foreign-exchange-market-rates/):
-
-> The first line of the file consists of the date for which the exchange rate was declared in `DD.MM.YYYY` format. After the date there are 2 spaces and a # sign together with the sequence number of the rates published within the year.
->
-> Example 1st line:
->
-> ```
-> 03.Jan.2000 #1
-> ```
->
-> This line is followed by the exchange rates, with the first line consisting of a header in the following form:
->
-> ```
-> Country|Currency|Amount|Code|Rate
-> ```
->
-> The other lines contain the data themselves. Each line contains one currency. The individual figures are separated with a `|` sign; in the case of figures with a decimal part the decimal place separator is a `.` sign. Example for a specific currency:
->
-> ```
-> Australia|dollar|1|AUD|23.282
-> ```
->
-> The foreign exchange market rate data are followed by a blank line separating the data from the calculated rates (only for years 1999-2001). These start with the header:
->
-> ```
-> Country|Currency|Amount|Code|Rate
-> ```
->
-> The data themselves follow on the subsequent lines (the separator being a '|' sign).
->
-> Example line of data:
->
-> ```
-> Belgium|frank|100|BEF|89.762
-> ```
