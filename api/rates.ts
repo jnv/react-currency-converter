@@ -1,5 +1,5 @@
-import { parseRates } from '../src/server/parseRates.ts';
-import { RatesDocument } from '../src/types.ts';
+import { parseRates } from '../src/server/parseRates.js';
+import { RatesDocument } from '../src/types';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const RATE_API_URL =
