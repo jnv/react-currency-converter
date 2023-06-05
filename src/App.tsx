@@ -1,7 +1,6 @@
 import CurrenciesTable from './components/CurrenciesTable';
 import CurrencyConverter from './components/CurrencyConverter';
 import {
-  Column,
   Container,
   MainHeading,
   SectionHeading,
