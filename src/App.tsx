@@ -27,10 +27,10 @@ function App() {
     return (
       <Column>
         <MainHeading>Currency Converter</MainHeading>
-        <CurrencyConverter currencies={data} />
+        <CurrencyConverter currencies={data.currencies} />
         <section>
           <SectionHeading>Current Rates</SectionHeading>
-          <CurrenciesTable currencies={data} />
+          <CurrenciesTable ratesDocument={data} />
         </section>
       </Column>
     );

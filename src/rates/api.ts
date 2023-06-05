@@ -1,7 +1,7 @@
 import { RATE_API_URL } from '../config';
-import { Currency } from '../types';
+import { CurrenciesByCode, Currency, RatesDocument } from '../types';
 
-export async function fetchRates(): Promise<Currency[]> {
+export async function fetchRates(): Promise<RatesDocument> {
   const response = await fetch(RATE_API_URL, { referrerPolicy: 'no-referrer' });
   if (!response.ok) {
     console.log(response.status);
@@ -22,13 +22,16 @@ function isCurrencyProperty(header: string): header is keyof Currency {
   return currencyProps.has(header);
 }
 
-function parseText(text: string): Currency[] {
+function parseText(text: string): RatesDocument {
   const lines = text.split('\n');
   const headers = lines[1].split('|').map((header) => header.toLowerCase());
 
-  const currencies: Currency[] = [];
+  // Parse the metadata line
+  const [date, sequence] = lines[0].split('#').map((segment) => segment.trim());
 
-  // Skip first 2 lines
+  const currencies: CurrenciesByCode = {};
+
+  // Skip the metadata + header lines
   for (let i = 2; i < lines.length; i++) {
     const currentLine = lines[i].trim();
     if (!currentLine) {
@@ -46,10 +49,14 @@ function parseText(text: string): Currency[] {
       }
     }
 
-    currencies.push(currency as Currency);
+    currencies[currency.code] = currency as Currency;
   }
 
-  return currencies;
+  return {
+    date,
+    sequence: Number(sequence),
+    currencies,
+  };
 }
 
 if (import.meta.vitest) {
@@ -63,22 +70,27 @@ Brazil|real|1|BRL|4.405
 `;
 
     it('converts a text to currencies', () => {
-      expect(parseText(inputShort)).toEqual([
-        {
-          country: 'Australia',
-          currency: 'dollar',
-          amount: 1,
-          code: 'AUD',
-          rate: 14.561,
+      const expected: RatesDocument = {
+        date: '02 Jun 2023',
+        sequence: 106,
+        currencies: {
+          AUD: {
+            country: 'Australia',
+            currency: 'dollar',
+            amount: 1,
+            code: 'AUD',
+            rate: 14.561,
+          },
+          BRL: {
+            country: 'Brazil',
+            currency: 'real',
+            amount: 1,
+            code: 'BRL',
+            rate: 4.405,
+          },
         },
-        {
-          amount: 1,
-          code: 'BRL',
-          country: 'Brazil',
-          currency: 'real',
-          rate: 4.405,
-        },
-      ]);
+      };
+      expect(parseText(inputShort)).toEqual(expected);
     });
   });
 }

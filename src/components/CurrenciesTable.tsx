@@ -1,10 +1,16 @@
 import styled from 'styled-components';
-import { Currency } from '../types';
+import { RatesDocument } from '../types';
 import { getCurrencyFlag } from '../utils';
 
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
+`;
+
+const TableCaption = styled.caption`
+  caption-side: bottom;
+  padding: 1em 0;
+  text-align: left;
 `;
 
 const Row = styled.tr`
@@ -28,11 +34,15 @@ const HeadCell = styled(Cell)`
 `;
 
 type Props = {
-  currencies: Currency[];
+  ratesDocument: RatesDocument;
 };
-export function CurrenciesTable({ currencies }: Props) {
+export function CurrenciesTable({ ratesDocument }: Props) {
+  const currencies = Object.values(ratesDocument.currencies);
   return (
     <Table>
+      <TableCaption>
+        Rates updated on {ratesDocument.date} (#{ratesDocument.sequence})
+      </TableCaption>
       <thead>
         <HeadRow>
           <HeadCell>Country</HeadCell>

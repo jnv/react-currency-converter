@@ -1,4 +1,4 @@
-import { Currency } from '../types';
+import { CurrenciesByCode } from '../types';
 import styled from 'styled-components';
 import { getCurrencyFlag } from '../utils';
 import { FormEvent, useState } from 'react';
@@ -41,11 +41,12 @@ const OutputWrapper = styled.div`
 `;
 
 type FormProps = {
-  currencies: Currency[];
+  currencies: CurrenciesByCode;
   onChange: FormEventHandler<HTMLFormElement>;
 };
 
 function ConversionForm({ currencies, onChange }: FormProps) {
+  const currenciesVals = Object.values(currencies);
   return (
     <CurrencyForm onChange={onChange} onSubmit={onChange} id={FORM_IDS.form}>
       <FormGroup>
@@ -61,7 +62,7 @@ function ConversionForm({ currencies, onChange }: FormProps) {
         <label htmlFor={FORM_IDS.amount}>{getCurrencyFlag('CZK')} CZK</label>{' '}
         <label htmlFor={FORM_IDS.currency}>to</label>{' '}
         <CurrencySelect id={FORM_IDS.currency} name={FORM_IDS.currency}>
-          {currencies.map((currency) => (
+          {currenciesVals.map((currency) => (
             <option key={currency.code} value={currency.code}>
               {getCurrencyFlag(currency.code)} {currency.code}
             </option>
@@ -74,25 +75,20 @@ function ConversionForm({ currencies, onChange }: FormProps) {
 
 type ConversionResultProps = {
   amount: number;
-  selectedCurrency: string;
-  currencies: Currency[];
+  selectedCode: string;
+  currencies: CurrenciesByCode;
 };
 function ConversionResult({
   amount,
-  selectedCurrency,
+  selectedCode,
   currencies,
 }: ConversionResultProps) {
+  const selectedCurrency = currencies[selectedCode];
   if (!selectedCurrency) {
     return null;
   }
-  const selectedCurrencyEntry = currencies.find(
-    (currency) => currency.code === selectedCurrency
-  );
-  if (!selectedCurrencyEntry) {
-    return null;
-  }
 
-  const result = convertAmountToCurrency(amount, selectedCurrencyEntry);
+  const result = convertAmountToCurrency(amount, selectedCurrency);
 
   return (
     <OutputWrapper>
@@ -102,14 +98,14 @@ function ConversionResult({
         htmlFor={`${FORM_IDS.amount} ${FORM_IDS.currency}`}
         id={FORM_IDS.output}
       >
-        {result} {selectedCurrency}
+        {result} {selectedCode}
       </ConversionOutput>
     </OutputWrapper>
   );
 }
 
 type ConverterProps = {
-  currencies: Currency[];
+  currencies: CurrenciesByCode;
 };
 
 type ConversionInput = {
@@ -137,7 +133,7 @@ export function CurrencyConverter({ currencies }: ConverterProps) {
       <ConversionResult
         currencies={currencies}
         amount={conversionInput.amount}
-        selectedCurrency={conversionInput.currency}
+        selectedCode={conversionInput.currency}
       />
     </ConverterWrapper>
   );
