@@ -8,6 +8,9 @@ export function useRatesQuery<T = RatesDocument>(
   return useQuery({
     queryKey: ['rates'],
     queryFn: fetchRates,
+    staleTime: Infinity,
+    cacheTime: 600_000, // 10 mins
+    refetchOnWindowFocus: false,
     select,
   });
 }
