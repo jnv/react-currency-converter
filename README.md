@@ -12,7 +12,7 @@ Run `npm i`
 
 ## Usage
 
-Start the development server with `vercel dev`
+Start the development server with `npx vercel dev`
 
 ## Implementation notes
 
